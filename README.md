@@ -5,7 +5,7 @@
 
 A mapping test
 
-Deployed at [https://philrmass.github.io/sparrow/](https://philrmass.github.io/sparrow/)
+Deployed at [https://philrmass.github.io/noon/](https://philrmass.github.io/noon/)
 
 ### Run locally
 - `git clone git@github.com:philrmass/noon.git`
