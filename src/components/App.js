@@ -1,36 +1,52 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import L from 'leaflet';
 
 import { getWeather } from '../redux/weatherActions';
 import styles from './App.module.css';
 
+//??? select tiles
 export default function App() {
+  const [text, setText] = useState('');
   const dis = useDispatch();
   const weather = useSelector(state => state.weather.forecast);
-  const version = '0.0.1';
+  const version = '0.0.3';
 
   useEffect(() => {
-    console.log('Map setup');
-    const map = window.L.map('mapId').setView([51.505, -0.09], 13);
-    const tileLayer = getTileLayer(0);
-    tileLayer.addTo(map);
+    if ('geolocation' in navigator) {
+      setText('geo is ok');
+      navigator.geolocation.getCurrentPosition((position) => {
+        setText(`geo is [${position.coords.latitude} ${position.coords.longitude}]`);
+      });
+    } else {
+      setText('geo NOT ok');
+    }
+    setupMap();
   }, []);
 
   return (
     <div className={styles.app}>
       <div className={styles.content}>
         <div className={styles.weather}>
-          <button onClick={() => dis(getWeather())}>
+          <button className='button' onClick={() => dis(getWeather())}>
             Get Weather
           </button>
           <div>{`Weather: ${weather}`}</div>
+          <div>{`[${text}]`}</div>
         </div>
         <div id='mapId' className={styles.map}></div>
       </div>
       <div className={styles.version}>{version}</div>
     </div>
   );
+}
+
+function setupMap() {
+  const lat = 45.47838;
+  const long = -122.64553;
+  const map = window.L.map('mapId').setView([lat, long], 14);
+  const tileLayer = getTileLayer(0);
+  tileLayer.addTo(map);
 }
 
 function getTileLayer(index) {

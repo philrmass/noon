@@ -1,5 +1,6 @@
 @import './fonts.css';
 @import './reset.css';
+@import 'leaflet/dist/leaflet.css';
 
 :root {
   --size0: 4px;
@@ -13,4 +14,11 @@
 
 body {
   font-family: var(--fontRegular);
+}
+
+.button {
+  padding: var(--size1) var(--size2);
+  border-radius: 4px;
+  background: #484848;
+  color: #f0f0f0;
 }
