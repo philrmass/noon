@@ -4,24 +4,6 @@
   bottom: 0;
   left: 0;
   right: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #def;
-}
-
-.content {
-  border: 1px solid #888;
-}
-
-.weather {
-  background: #0002;
-}
-
-.map {
-  width: 256px;
-  height: 256px;
 }
 
 .version {
@@ -29,4 +11,6 @@
   right: var(--size1);
   bottom: var(--size1);
   font-size: 0.7em;
+  color: #d80000;
+  z-index: 500;
 }

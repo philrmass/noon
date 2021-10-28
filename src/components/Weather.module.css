@@ -1,0 +1,8 @@
+.weather {
+  padding: var(--size2);
+  background: #ccddee;
+}
+
+.text {
+  margin-top: var(--size1);
+}
