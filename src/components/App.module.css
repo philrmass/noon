@@ -9,8 +9,7 @@
 .version {
   position: fixed;
   right: var(--size1);
-  bottom: var(--size1);
+  top: var(--size1);
   font-size: 0.7em;
-  color: #d80000;
   z-index: 500;
 }
