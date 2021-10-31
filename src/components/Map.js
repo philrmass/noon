@@ -1,47 +1,43 @@
 import { useEffect, useState } from 'react';
-import L from 'leaflet';
 
-import { setupMap } from '../utilities/map';
+import { addDot, setupMap } from '../utilities/map';
 import styles from './Map.module.css';
 
-//??? select tile set
-//??? get position, zoom map
 export default function Map() {
   const id = 'mapId';
   const [text, setText] = useState('');
   const [map, setMap] = useState();
+  const [watchId, setWatchId] = useState(null);
 
   useEffect(() => {
     setMap(setupMap(id));
   }, []);
 
   const locate = () => {
-    /*
-    const pt = [45, -122];
-    map.setView(pt);
-    //const marker = L.marker(pt).addTo(map);
-    var circle = L.circle(pt, {
-      color: 'red',
-      fillColor: '#f03',
-      fillOpacity: 0.5,
-      radius: 5,
-    }).addTo(map);
-    setText(`Locate to [${pt[0]} ${pt[1]}] (${typeof circle})`);
-    */
-
     if (map && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
+      navigator.geolocation.getCurrentPosition(pos => {
         const pt = [pos.coords.latitude, pos.coords.longitude];
-
+        setText(`Locate [${pt[0].toFixed(6)} ${pt[1].toFixed(6)}] ${(new Date()).toLocaleTimeString()}`);
         map.setView(pt);
-        var marker = L.circle(pt, {
-          color: 'red',
-          fillColor: '#f03',
-          fillOpacity: 0.5,
-          radius: 5,
-        }).addTo(map);
-        //const marker = L.marker(pt).addTo(map);
-        setText(`Locate to [${pt[0]} ${pt[1]}] (${typeof marker})`);
+        addDot(map, pt, { color: '#08f', fillColor: '#08f' });
+      });
+    }
+  };
+
+  const track = () => {
+    if (map && navigator.geolocation) {
+      setWatchId(id => {
+        if (id) {
+          navigator.geolocation.clearWatch(id);
+          return null;
+        }
+
+        return navigator.geolocation.watchPosition(pos => {
+          const pt = [pos.coords.latitude, pos.coords.longitude];
+          setText(`Watch [${pt[0].toFixed(6)} ${pt[1].toFixed(6)}] ${(new Date()).toLocaleTimeString()}`);
+          map.setView(pt);
+          addDot(map, pt);
+        });
       });
     }
   };
@@ -52,7 +48,10 @@ export default function Map() {
         <button className='button' onClick={locate}>
           Locate
         </button>
-        <div className={styles.text}>{`[${text}]`}</div>
+        <button className='button' onClick={track}>
+          {watchId ? 'Stop' : 'Track'}
+        </button>
+        <div className={styles.text}>{text}</div>
       </div>
       <div id={id} className={styles.map}></div>
     </>

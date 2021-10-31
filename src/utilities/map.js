@@ -1,5 +1,17 @@
 import L from 'leaflet';
 
+export function addDot(map, pt, options = {}) {
+  const allOptions = {
+    color: '#f00',
+    fillColor: '#f00',
+    fillOpacity: 1,
+    radius: 1,
+    ...options,
+  };
+
+  L.circle(pt, allOptions).addTo(map);
+}
+
 function getTileLayer(index) {
   switch (index) {
     case 2:
@@ -25,7 +37,7 @@ function getTileLayer(index) {
 export function setupMap() {
   const lat = 45.520;
   const long = -122.66553;
-  const map = window.L.map('mapId').setView([lat, long], 14);
+  const map = window.L.map('mapId').setView([lat, long], 19);
   const tileLayer = getTileLayer(0);
   tileLayer.addTo(map);
 

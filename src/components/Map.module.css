@@ -3,6 +3,10 @@
   background: #ddeeff;
 }
 
+.controls > * {
+  margin-right: var(--size1);
+}
+
 .text {
   margin-top: var(--size1);
 }

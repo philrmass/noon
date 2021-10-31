@@ -4,7 +4,7 @@ import Map from './Map.js';
 import Weather from './Weather.js';
 
 export default function App() {
-  const version = '0.0.6';
+  const version = '0.0.7';
 
   return (
     <div className={styles.app}>
