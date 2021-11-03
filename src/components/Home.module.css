@@ -3,3 +3,9 @@
   height: 100%;
   background: #8f0;
 }
+
+.nav {
+  padding: var(--size1) var(--size2);
+  display: flex;
+  gap: var(--size2);
+}

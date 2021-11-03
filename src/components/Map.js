@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { addDot, setupMap } from '../utilities/map';
 import styles from './Map.module.css';
@@ -44,6 +45,10 @@ export default function Map() {
 
   return (
     <>
+      <div className={styles.nav}>
+        <Link to='/'>Home</Link>
+        <Link to='/weather'>Weather</Link>
+      </div>
       <div className={styles.controls}>
         <button className='button' onClick={locate}>
           Locate

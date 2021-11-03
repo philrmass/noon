@@ -6,3 +6,9 @@
 .text {
   margin-top: var(--size1);
 }
+
+.nav {
+  padding: var(--size1) var(--size2);
+  display: flex;
+  gap: var(--size2);
+}
