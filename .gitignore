@@ -6,5 +6,6 @@ dist/*
 !dist/logo512.png
 !dist/logoApple.png
 !dist/logoMaskable.png
+!dist/serviceWorker.js
 *.swp
 .DS_Store
