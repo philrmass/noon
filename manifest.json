@@ -1,0 +1,31 @@
+{
+  "short_name": "Noon",
+  "name": "Noon",
+  "start_url": "/noon/index.html",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "logoMaskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}
