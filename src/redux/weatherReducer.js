@@ -1,15 +1,21 @@
-import { SET_WEATHER } from './constants';
+import { SET_FORECAST, SET_WEATHER } from './constants';
 
 const defaultState = {
-  forecast: '',
+  forecast: null,
+  summary: '',
 };
 
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
+    case SET_FORECAST: 
+      return {
+        ...state,
+        forecast: action.value,
+      };
     case SET_WEATHER: 
       return {
         ...state,
-        forecast: action.forecast,
+        summary: action.value,
       };
     default:
       return state;

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { addDot, setupMap } from '../utilities/map';
+import { updateLocation } from '../redux/mapActions';
 import styles from './Map.module.css';
 
 export default function Map() {
@@ -9,6 +11,7 @@ export default function Map() {
   const [text, setText] = useState('');
   const [map, setMap] = useState();
   const [watchId, setWatchId] = useState(null);
+  const dis = useDispatch();
 
   useEffect(() => {
     setMap(setupMap(id));
@@ -21,6 +24,7 @@ export default function Map() {
         setText(`Locate [${pt[0].toFixed(6)} ${pt[1].toFixed(6)}] ${(new Date()).toLocaleTimeString()}`);
         map.setView(pt);
         addDot(map, pt, { color: '#08f', fillColor: '#08f' });
+        dis(updateLocation(pt));
       });
     }
   };
@@ -38,6 +42,7 @@ export default function Map() {
           setText(`Watch [${pt[0].toFixed(6)} ${pt[1].toFixed(6)}] ${(new Date()).toLocaleTimeString()}`);
           map.setView(pt);
           addDot(map, pt);
+          dis(updateLocation(pt));
         });
       });
     }

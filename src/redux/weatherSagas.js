@@ -1,11 +1,12 @@
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, select, takeEvery } from 'redux-saga/effects';
 
 import { GET_WEATHER } from './constants';
-import { setWeather } from './weatherActions';
+import { setForecast, setWeather } from './weatherActions';
 
 function* getWeatherSaga() {
   try {
-    const url = 'https://api.weather.gov/points/43.615,-84.247';
+    const loc = yield select(state => state.map.location);
+    const url = `https://api.weather.gov/points/${loc[0].toFixed(4)},${loc[1].toFixed(4)}`;
     const response = yield fetch(url);
     const json = yield response.json();
 
@@ -13,10 +14,13 @@ function* getWeatherSaga() {
     const forecastResponse = yield fetch(forecastUrl);
     const forecastJson = yield forecastResponse.json();
 
-    const period = forecastJson?.properties?.periods[0];
-    const forecast = period?.detailedForecast;
+    const hourlyUrl = json?.properties?.forecastHourly;
+    const hourlyResponse = yield fetch(hourlyUrl);
+    const hourlyJson = yield hourlyResponse.json();
 
-    yield put(setWeather(forecast));
+    console.log('H', json?.properties);
+    yield put(setForecast(forecastJson));
+    //??? add hourly
   } catch (err) {
     console.error('Error getting weather', err);
   }

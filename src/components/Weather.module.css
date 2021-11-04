@@ -1,14 +1,40 @@
 .weather {
+  height: 100%;
   padding: var(--size2);
   background: #ccddee;
+  overflow-y: scroll;
 }
 
 .text {
-  margin-top: var(--size1);
+  margin: var(--size2) 0;
+}
+
+.data {
+  padding: var(--size0);
+  border: 1px solid #0003;
+  border-radius: var(--size1);
+  background: #fffb;
+  white-space: pre-wrap;
 }
 
 .nav {
   padding: var(--size1) var(--size2);
   display: flex;
   gap: var(--size2);
+}
+
+.periods {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.period {
+  padding: var(--size1);
+  margin: var(--size1);
+  background: #ffffff;
+}
+
+.night {
+  background: #404080;
+  color: #f8f8f8;
 }
